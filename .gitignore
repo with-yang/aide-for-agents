@@ -1,0 +1,7 @@
+.DS_Store
+
+# Internal: design docs, coding-agent guide and dev scripts stay local, never public
+/docs/
+/AGENTS.md
+/CLAUDE.md
+/scripts/
