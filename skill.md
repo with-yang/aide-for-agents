@@ -1,13 +1,13 @@
 # Install Aide
 
-Aide for Agents turns the user's Claude Code / Codex into their personal assistant. Your job here is to set up the assistant's home directory, then ask the user to open a new session there. Onboarding does not happen here.
+Aide for Agents turns the user's Claude Code / Codex into their personal assistant. This file installs Aide, or updates an existing install. Onboarding does not happen here.
 
 Speak to the user in their language.
 
 ## 1. Pick the home directory
 
 - Default: `~/aide`. Use another path if the user asks for one.
-- The directory exists and contains `.state.json`: already installed. Don't overwrite; skip to step 3.
+- The directory exists and contains `state.json` or `.state.json`: already installed. Don't reinstall — update it instead: follow `template/system/update.md` from this repository (the latest version, even if the install has its own copy), then stop.
 - The directory exists but isn't an Aide home (it has other things in it): stop and ask the user.
 
 ## 2. Install
@@ -18,10 +18,10 @@ Speak to the user in their language.
 AIDE_HOME=~/aide   # or the path the user chose
 mkdir -p "$AIDE_HOME"
 cp -R "<repo>/template/." "$AIDE_HOME/"
-cd "$AIDE_HOME" && git init -q && git add -A && git commit -qm "Install Aide $(cat .aide/VERSION)"
+cd "$AIDE_HOME" && git init -q && git add -A && git commit -qm "Install Aide $(cat system/VERSION)"
 ```
 
-Check afterwards: `$AIDE_HOME/AGENTS.md`, `$AIDE_HOME/.aide/core.md` and `$AIDE_HOME/.state.json` exist, and `CLAUDE.md` is a symlink to `AGENTS.md`.
+Check afterwards: `$AIDE_HOME/AGENTS.md`, `$AIDE_HOME/system/core.md` and `$AIDE_HOME/state.json` exist, and `CLAUDE.md` is a symlink to `AGENTS.md`.
 
 ## 3. Send the user to a new session in the home directory
 

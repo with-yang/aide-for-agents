@@ -20,6 +20,10 @@ Or clone this repository and ask your agent to read `skill.md`.
 
 After installing, open a new session in `~/aide` and say hi. The assistant takes it from there.
 
+## Update
+
+Your daily brief tells you when a new version is out; click update, or tell your assistant "update Aide". Your own files (profile, goals, memories, briefs) are never overwritten. What changed is in [CHANGELOG.md](CHANGELOG.md).
+
 ## Requirements
 
 - Claude Code (the Claude desktop app is needed for the daily brief) or Codex

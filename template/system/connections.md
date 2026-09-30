@@ -13,7 +13,7 @@ You only recommend and verify. Don't write out installation or authorization ste
 
 | Source | Recommended | Verify (show the user; if it matches, it works) | Background runs may only |
 |---|---|---|---|
-| Feishu / Lark (calendar, tasks, mail, messages) | `lark-cli` (usage in the companion `lark-*` skills) | Today's events and open tasks | Run query commands; never send messages or change events or tasks |
+| Feishu / Lark (calendar, tasks, mail, messages, docs) | `lark-cli` (usage in the companion `lark-*` skills) | Today's events and open tasks | Run query commands; never send messages or change events or tasks |
 | Gmail | The host's Gmail connector if present; otherwise Google's official Gmail MCP | Subject of the latest email | Search and read; never forward, create filters or send |
 | Google Calendar | The host's Google Calendar connector if present; otherwise Google's official Calendar MCP | Today's events | List and read events; never create, edit, delete or respond to invitations |
 | Notion | The host's Notion connector if present; otherwise Notion's official MCP | A page the user edited recently | Search and read; never create or edit pages |
@@ -22,11 +22,13 @@ You only recommend and verify. Don't write out installation or authorization ste
 | Local notes (Obsidian) | Read the vault directory directly (find it in Obsidian's config, see below) | A few recently modified notes | Read only |
 | Other local folders | Read directly and index (see below) | A few recently modified files | Read only |
 
-Whichever source the user picks as the place of record for todos, background runs may also add todos there (see "Todos and events" in `.aide/core.md`).
+## Notes and knowledge bases
+
+Always ask about these, whatever the goals — they're the richest source for knowing the user. Common ones: Notion and Feishu docs (see the table), Obsidian and other local folders (below). For anything else (Apple Notes, …), follow "Apps not in the table".
 
 ## Local folders
 
-Connectors aren't the only sources. Remind the user that folders they use often (Obsidian vaults, work documents, project directories) can be connected too. Don't copy their contents — index them in `me/connections.md`, so you know where to look later:
+Connectors aren't the only sources. Folders the user relies on (Obsidian vaults, work documents, project directories) can be connected too. Don't copy their contents — index them in `me/connections.md`, so you know where to look later:
 
 ```markdown
 ## Local folder: work documents
@@ -44,12 +46,12 @@ Connectors aren't the only sources. Remind the user that folders they use often 
 
 ## Where todos live
 
-Ask where the user keeps todos. Pick one place of record (see "Todos and events" in `.aide/core.md`):
+Ask where the user keeps todos. Pick one place of record (see "Todos and events" in `system/core.md`):
 
 - They use a todo app (Apple Reminders, Todoist, Feishu tasks, …): that app. A side benefit: the app pushes reminders to their phone.
 - Nothing, or scattered across several places: suggest `todo.md` in this directory, or one of the apps they already touch if they prefer phone reminders.
 
-Record the choice in `me/connections.md`. If todos are scattered (documents, several apps), offer a one-time consolidation: read the open items from each place, show them, and after the user confirms, put them into the place of record. Keep reading the other places afterwards, but only write to the chosen one.
+Record the choice in `me/connections.md`. From then on, new todos go there.
 
 ## Apps not in the table
 

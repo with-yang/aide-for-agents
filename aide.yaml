@@ -1,8 +1,8 @@
 # Aide for Agents manifest (v0 draft; format will follow the platform API)
 name: aide
 title: Aide for Agents
-version: 0.0.1          # keep in sync with template/.aide/VERSION
-schema: 1               # keep in sync with schema in template/.state.json
+version: 0.1.0          # keep in sync with template/system/VERSION
+schema: 1               # keep in sync with schema in template/state.json
 
 home:
   default: ~/aide
@@ -13,6 +13,6 @@ template: template/
 
 routines:
   - id: daily-brief
-    instructions: .aide/routines/daily-brief.md
+    instructions: system/routines/daily-brief.md
     default_schedule: "30 8 * * *"   # local time; confirmed with the user during onboarding
-    mode: read-only   # except adding todos to the user's chosen todo list
+    mode: read-only
