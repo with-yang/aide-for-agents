@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-zh="Aide for Agents：把 Claude Code 或 Codex 变成你的私人助理">Aide for Agents — turn Claude Code or Codex into your personal assistant</title>
+<meta name="description" content="Aide lives in a folder on your computer. Open Claude Code or Codex there and it knows who you are, what you're working toward, and who the people in your life are. Every morning it sends you a brief.">
+<meta property="og:title" content="Aide for Agents">
+<meta property="og:description" content="Turn your Claude Code or Codex into your personal assistant.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aideforagents.com">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23ff9a3d'/><stop offset='1' stop-color='%23ff4f8b'/></linearGradient></defs><rect width='32' height='32' rx='9' fill='url(%23g)'/><text x='16' y='23' font-size='20' text-anchor='middle' font-family='Georgia,serif' font-style='italic' fill='white'>a</text></svg>">
+<link rel="stylesheet" href="style.css">
+<script>
+// One URL, two languages: Simplified Chinese browsers see Chinese, everyone else English.
+// An explicit switch (saved in localStorage) wins over the browser language.
+(function () {
+  var zh = false;
+  try {
+    var saved = localStorage.getItem('aide-lang');
+    var lang = (navigator.languages && navigator.languages[0]) || navigator.language || '';
+    zh = saved ? saved === 'zh' : /^zh(-(cn|sg|hans)(-.*)?)?$/i.test(lang);
+  } catch (e) {}
+  if (zh) document.documentElement.className = 'zh';
+})();
+</script>
+</head>
+<body>
+
+<div class="glow" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<div class="wrap">
+  <nav>
+    <a class="logo" href="#"><b></b>aide</a>
+    <div class="links">
+      <a href="#compare" data-zh="为什么是 Aide">Why Aide</a>
+      <a href="#how" data-zh="怎么用">How it works</a>
+      <a href="https://github.com/with-yang/aide-for-agents">GitHub</a>
+      <a class="lang" href="#" data-lang="zh" data-zh="EN" data-zh-lang="en">中文</a>
+      <a class="pill" href="#install" data-zh="安装">Install</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <span class="eyebrow">Aide for Agents</span>
+    <h1><span data-zh="把你的">Turn your</span>
+      <span class="rot" aria-live="off">
+        <span class="agent on"><img src="icons/claudecode-color.svg" alt="">Claude Code</span>
+        <span class="agent"><img src="icons/codex-color.svg" alt="">Codex</span>
+        <span class="agent"><img src="icons/geminicli-color.svg" alt="">Gemini CLI</span>
+        <span class="agent"><i class="mono" style="--i:url(icons/cursor.svg)"></i>Cursor</span>
+        <span class="agent"><i class="mono" style="--i:url(icons/githubcopilot.svg)"></i>Copilot</span>
+        <span class="agent"><i class="mono" style="--i:url(icons/opencode.svg)"></i>OpenCode</span>
+      </span>
+      <span data-zh="变成&lt;em&gt;你的私人助理&lt;/em&gt;">into <em>your personal assistant.</em></span></h1>
+    <p class="lede" data-zh="它记得你，推进你的目标，每天早上给你一份简报。">It remembers you, keeps your goals moving, and briefs you every morning.</p>
+
+    <ul class="promises">
+      <li data-zh="&lt;b&gt;不用装新 App&lt;/b&gt;"><b>No new app</b></li>
+      <li data-zh="&lt;b&gt;不用注册账号&lt;/b&gt;"><b>No account</b></li>
+      <li data-zh="&lt;b&gt;数据只留在你的电脑上&lt;/b&gt;"><b>Your data stays on your computer</b></li>
+    </ul>
+
+    <div class="install">
+      <div>
+        <div class="label" data-zh="对 Claude Code 或 Codex 说">Ask Claude Code or Codex</div>
+        <p id="hero-prompt" data-zh="读一下 https://github.com/with-yang/aide-for-agents 里的 &lt;b&gt;skill.md&lt;/b&gt;，帮我安装 Aide。">Read <b>skill.md</b> in https://github.com/with-yang/aide-for-agents and install Aide for me.</p>
+      </div>
+      <button type="button" data-copy="hero-prompt" data-done="Copied" data-zh="复制" data-zh-done="已复制">Copy</button>
+    </div>
+
+    <div class="stage" aria-label="Example daily brief">
+      <div class="note n1" data-zh="它记得你们聊到哪了 ✎">It remembers where you left off ✎</div>
+      <div class="brief">
+        <div class="top">
+          <div class="sun"></div>
+          <div><h3 data-zh="早上好，Alex">Good morning, Alex</h3><div class="when" data-zh="周二 · 8:30">Tuesday · 8:30</div></div>
+        </div>
+
+        <span class="group g-today" data-zh="今天">Today</span>
+        <div class="item" style="animation-delay:.3s"><div data-zh="10:00 和 Jordan 开会&lt;small&gt;他在等你对定价的反馈。&lt;/small&gt;">10:00 with Jordan<small>He's waiting on your pricing feedback.</small></div><span class="btn" data-zh="帮我准备">Prep me</span></div>
+        <div class="item clicked" style="animation-delay:.6s"><div data-zh="把方案发给 Jordan&lt;small&gt;你答应了周三前发。&lt;/small&gt;">Send Jordan the proposal<small>You promised it by Wednesday.</small></div><span class="btn" data-zh="加入待办">Add to todos</span></div>
+
+        <span class="group g-goals" data-zh="目标">Goals</span>
+        <div class="item" style="animation-delay:.9s"><div data-zh="半马：周六跑 16 公里&lt;small&gt;该换双跑鞋了。&lt;/small&gt;">Half marathon: 16 km on Saturday<small>Time for new shoes.</small></div><span class="btn" data-zh="提醒我">Remind me</span></div>
+
+        <span class="group g-people" data-zh="人">People</span>
+        <div class="item" style="animation-delay:1.2s"><div data-zh="Chris 周五生日&lt;small&gt;你们六周没聊了。&lt;/small&gt;">Chris's birthday is Friday<small>It's been six weeks.</small></div><span class="btn" data-zh="起草问候">Draft a note</span></div>
+      </div>
+      <div class="note n2" data-zh="聊天里答应的事，自动变成待办 ✓">Promises in chats become todos ✓</div>
+    </div>
+  </header>
+</div>
+
+<div class="wrap works reveal">
+  <p data-zh="接入你已经在用的应用">Works with the apps you already use</p>
+  <ul>
+    <li><i style="--i:url(icons/gmail.svg)"></i>Gmail</li>
+    <li data-zh="&lt;i style=&quot;--i:url(icons/googlecalendar.svg)&quot;&gt;&lt;/i&gt;Google 日历"><i style="--i:url(icons/googlecalendar.svg)"></i>Google Calendar</li>
+    <li><i style="--i:url(icons/slack.svg)"></i>Slack</li>
+    <li><i style="--i:url(icons/notion.svg)"></i>Notion</li>
+    <li><i style="--i:url(icons/obsidian.svg)"></i>Obsidian</li>
+    <li><i style="--i:url(icons/github.svg)"></i>GitHub</li>
+  </ul>
+</div>
+
+<section id="compare">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow" data-zh="为什么不直接用 agent？">Why not just an agent?</span>
+      <h2 data-zh="同一个 agent，&lt;em&gt;现在它认识你了。&lt;/em&gt;">Same agent. <em>Now it knows you.</em></h2>
+    </div>
+
+    <div class="compare reveal">
+      <div class="tabs" role="tablist">
+        <button type="button" role="tab" class="tab on" data-s="0" data-zh="准备会议">Prep for a meeting</button>
+        <button type="button" role="tab" class="tab" data-s="1" data-zh="周一早上">Monday morning</button>
+        <button type="button" role="tab" class="tab" data-s="2" data-zh="换到 Codex">Switch to Codex</button>
+      </div>
+
+      <div class="scene on">
+        <div class="pane bare">
+          <div class="pane-h" data-zh="裸 agent">Bare agent</div>
+          <div class="msg you" data-zh="帮我准备一下 10 点的会。">Prep me for my 10:00.</div>
+          <div class="msg ai" data-zh="好的！这是什么会？都有谁参加？">Sure! What's the meeting about, and who's attending?</div>
+          <div class="verdict" data-zh="每次都从零开始。">Starts from zero.</div>
+        </div>
+        <div class="pane aide">
+          <div class="pane-h" data-zh="装了 Aide">With Aide</div>
+          <div class="msg you" data-zh="帮我准备一下 10 点的会。">Prep me for my 10:00.</div>
+          <div class="msg ai" data-zh="是和 Jordan 的会。他在等你对定价的反馈，你还欠他一份方案。先把反馈起草好？">It's Jordan. He's waiting on your pricing feedback, and you still owe him the proposal. Draft the feedback first?</div>
+          <div class="verdict" data-zh="知道是谁，也知道你们聊到哪了。">Knows who, and where you left off.</div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="pane bare">
+          <div class="pane-h" data-zh="裸 agent">Bare agent</div>
+          <div class="silence">…</div>
+          <div class="verdict" data-zh="你不问，它不说。">Waits for you to ask.</div>
+        </div>
+        <div class="pane aide">
+          <div class="pane-h" data-zh="装了 Aide">With Aide</div>
+          <div class="msg ai" data-zh="发布周撞上了周六的长距离跑，挪到周日？">Launch week collides with Saturday's long run. Move it to Sunday?</div>
+          <div class="msg ai" data-zh="&quot;找 5 个用户聊聊&quot;两周没动了。继续、暂停，还是放下？">"Talk to 5 users" hasn't moved in two weeks. Keep it, pause it, or drop it?</div>
+          <div class="verdict" data-zh="它会先来找你。">Comes to you first.</div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <div class="pane bare">
+          <div class="pane-h" data-zh="裸 agent · 在 Codex 里">Bare agent · in Codex</div>
+          <div class="msg you" data-zh="我这周有什么事？">What's on my plate this week?</div>
+          <div class="msg ai" data-zh="我看不到你之前的对话。">I don't have access to your earlier conversations.</div>
+          <div class="verdict" data-zh="记忆困在一个 App 里。">Memory stuck in one app.</div>
+        </div>
+        <div class="pane aide">
+          <div class="pane-h" data-zh="装了 Aide · 在 Codex 里">With Aide · in Codex</div>
+          <div class="msg you" data-zh="我这周有什么事？">What's on my plate this week?</div>
+          <div class="msg ai" data-zh="周三前给 Jordan 发方案，周五 Chris 生日，周六长距离跑。">Jordan's proposal by Wednesday, Chris's birthday Friday, your long run Saturday.</div>
+          <div class="verdict" data-zh="换哪个 agent，记忆都在。">Same memory, any agent.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="files">
+  <div class="wrap">
+    <div class="files-grid reveal">
+      <div>
+        <span class="eyebrow" data-zh="只是文件">Just files</span>
+        <h2 data-zh="它知道什么，&lt;em&gt;你都看得见。&lt;/em&gt;">See exactly <em>what it knows.</em></h2>
+        <p class="big" data-zh="每一条记忆都是一个文件，你可以打开、修改、留着。">Every memory is a file you can open, edit, and keep.</p>
+      </div>
+
+      <div class="file" aria-label="Example memory file for a person">
+        <div class="file-h"><i></i><i></i><i></i><span>memory/people/<b>Jordan Lee.md</b></span></div>
+        <div class="file-b">
+<pre class="fm">---
+name: Jordan Lee
+handles: [slack:@jordan, email:jordan@example.com]
+tier: core
+---</pre>
+          <div class="sec s-you">
+            <div class="sec-h"><b data-zh="我说的">What you told me</b><span class="tag" data-zh="你写的">You wrote</span></div>
+            <p data-zh="他发邮件要立刻告诉我。">Tell me right away when Jordan emails.</p>
+          </div>
+          <div class="sec s-obs">
+            <div class="sec-h"><b data-zh="助理观察到的">What I've noticed</b><span class="tag" data-zh="Aide 写的">Aide wrote</span></div>
+            <p data-zh="决策快。通话前喜欢先看一份简短的总结。">Decides fast. Likes a short summary before a call.</p>
+          </div>
+          <div class="sec s-log">
+            <div class="sec-h"><b data-zh="往来">Log</b></div>
+            <p data-zh="09-28 · 聊天 · 你答应周三前发方案&lt;br&gt;
+            09-24 · 会议 · 过了一遍定价">09-28 · Chat · you promised the proposal by Wednesday<br>
+            09-24 · Meeting · walked through pricing</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow" data-zh="怎么用">How it works</span>
+      <h2 data-zh="两分钟，&lt;em&gt;就能用上。&lt;/em&gt;">Up and running in <em>two minutes.</em></h2>
+    </div>
+    <div class="steps reveal">
+      <div class="step">
+        <div class="n">1</div>
+        <h3 data-zh="粘贴一句话">Paste one sentence</h3>
+        <p data-zh="发给 Claude Code 或 Codex。">Into Claude Code or Codex.</p>
+      </div>
+      <div class="step">
+        <div class="n">2</div>
+        <h3 data-zh="打个招呼">Say hi</h3>
+        <p data-zh="它会了解你，接上你的应用。">It gets to know you and your apps.</p>
+      </div>
+      <div class="step">
+        <div class="n">3</div>
+        <h3 data-zh="醒来就有简报">Wake up to a brief</h3>
+        <p data-zh="每天早上一份。没有你点头，它什么都不做。">Every morning. It never acts without your yes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="install" style="padding-top:40px">
+  <div class="wrap">
+    <div class="cta-panel reveal">
+      <h2 data-zh="来见见&lt;em&gt;你的助理。&lt;/em&gt;">Meet your <em>assistant.</em></h2>
+      <div class="install" style="margin-inline:auto">
+        <div>
+          <div class="label" data-zh="对 Claude Code 或 Codex 说">Ask Claude Code or Codex</div>
+          <p id="final-prompt" data-zh="读一下 https://github.com/with-yang/aide-for-agents 里的 &lt;b&gt;skill.md&lt;/b&gt;，帮我安装 Aide。">Read <b>skill.md</b> in https://github.com/with-yang/aide-for-agents and install Aide for me.</p>
+        </div>
+        <button type="button" data-copy="final-prompt" data-done="Copied" data-zh="复制" data-zh-done="已复制">Copy</button>
+      </div>
+      <div class="req" data-zh="免费开源 · macOS">Free and open source · macOS</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>Aide for Agents</div>
+    <div>
+      <a href="https://github.com/with-yang/aide-for-agents">GitHub</a>
+      <a href="https://github.com/with-yang/aide-for-agents/blob/main/CHANGELOG.md" data-zh="更新日志">Changelog</a>
+      <a href="https://github.com/with-yang/aide-for-agents/blob/main/LICENSE" data-zh="许可证">License</a>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

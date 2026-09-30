@@ -21,10 +21,18 @@ You only recommend and verify. Don't write out installation or authorization ste
 | GitHub | `gh` | PRs or issues the user was recently involved in | Query; never comment or change state |
 | Local notes (Obsidian) | Read the vault directory directly (find it in Obsidian's config, see below) | A few recently modified notes | Read only |
 | Other local folders | Read directly and index (see below) | A few recently modified files | Read only |
+| WeChat messages (macOS, read-only) | `wxvault`, see "WeChat" below | The user's most recent chats | `sessions`, `unread`, `history`, `search`, `contacts`, `members` |
 
 ## Notes and knowledge bases
 
 Always ask about these, whatever the goals — they're the richest source for knowing the user. Common ones: Notion and Feishu docs (see the table), Obsidian and other local folders (below). For anything else (Apple Notes, …), follow "Apps not in the table".
+
+## WeChat
+
+If the user wants to connect WeChat, recommend `wxvault` (https://github.com/with-yang/wxvault): it reads their own WeChat messages on macOS, read-only. Point them to its README for setup; whether and how to use it is their call.
+
+- **Verify**: `wxvault sessions --json` lists their recent chats.
+- **In a brief**: `wxvault sessions --json` shows which chats have new messages; read the ones that matter with `wxvault history "<chat>" --since <date> --json`. Keep conclusions and todos, not chat text.
 
 ## Local folders
 
@@ -57,7 +65,7 @@ Record the choice in `me/connections.md`. From then on, new todos go there.
 
 Find a way yourself, following the order of preference: check whether the host already has something, then whether the vendor offers an official MCP or CLI. Tell the user what you recommend and why; connect only after they agree.
 
-- Don't proactively recommend community workarounds that rely on reverse engineering or decrypting local databases (for example, reading WeChat chat history). If the user asks, explain how it works and the risks, and let them decide. Methods that require disabling system protections such as SIP are not supported.
+- Community workarounds that rely on reverse engineering or decrypting local data: don't recommend them on your own (WeChat is covered above). If the user asks about others, explain how they work and the risks, and let them decide. Methods that require disabling system protections such as SIP are not supported.
 
 ## After connecting
 

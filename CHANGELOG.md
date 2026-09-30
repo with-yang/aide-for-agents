@@ -2,6 +2,11 @@
 
 Each version has notes for the user and, when needed, notes for the assistant that performs the update (see `template/system/update.md`). Newest first.
 
+## 0.1.1 — 2026-09-30
+
+For you:
+- Your assistant can now read your WeChat messages (macOS, read-only) with `wxvault`, if you choose to set it up. Ask your assistant to connect WeChat.
+
 ## 0.1.0 — 2026-09-30
 
 For you:

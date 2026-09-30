@@ -1,7 +1,7 @@
 # Aide for Agents manifest (v0 draft; format will follow the platform API)
 name: aide
 title: Aide for Agents
-version: 0.1.0          # keep in sync with template/system/VERSION
+version: 0.1.1          # keep in sync with template/system/VERSION
 schema: 1               # keep in sync with schema in template/state.json
 
 home:
